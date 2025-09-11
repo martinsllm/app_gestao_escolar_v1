@@ -17,8 +17,8 @@ class Ocorrencia extends Model
         return $this->belongsTo(Estudante::class);
     }
 
-    public function castigo()
+    public function medida()
     {
-        return $this->belongsTo(Castigo::class);
+        return $this->hasOne(Medida::class);
     }
 }

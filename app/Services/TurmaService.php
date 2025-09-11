@@ -13,6 +13,11 @@ class TurmaService
         return Turma::all();
     }
 
+    public function findByPk(string $id): ?Turma
+    {
+        return Turma::find($id);
+    }
+
     public function store(array $data): Turma
     {
         return Turma::create($data);
@@ -20,8 +25,8 @@ class TurmaService
 
     public function update(Turma $turma, array $data): Turma
     {
-        $turma->update($data);
-
+        $turma->fill($data);
+        $turma->save();
         return $turma;
     }
 
