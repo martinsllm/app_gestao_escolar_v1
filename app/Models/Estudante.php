@@ -11,7 +11,12 @@ class Estudante extends Model
         'nome_completo',
         'data_nascimento',
         'telefone_responsavel',
+        'email',
         'turma_id'
+    ];
+
+    protected $casts = [
+        'data_nascimento' => 'date',
     ];
 
     public function turma()
