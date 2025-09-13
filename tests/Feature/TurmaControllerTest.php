@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Turma;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -10,9 +11,11 @@ class TurmaControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-
     public function test_index_returns_successful_response(): void
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         Turma::factory()->create();
 
         $response = $this->getJson('/api/v1/turmas');
@@ -23,6 +26,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_store_returns_successful_response(): void
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $data = [
             'codigo' => '101'
         ];
@@ -37,6 +43,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_store_validation_error_response()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $data = [
             'codigo' => ''
         ];
@@ -50,6 +59,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_show_returns_successful_response(): void
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $turma = Turma::factory()->create();
 
         $response = $this->getJson("/api/v1/turmas/{$turma->id}");
@@ -60,6 +72,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_show_returns_not_found_response(): void
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->getJson("/api/v1/turmas/999");
 
         $response->assertStatus(404);
@@ -68,6 +83,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_update_returns_successful_response(): void
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $turma = Turma::factory()->create();
 
         $data = [
@@ -83,6 +101,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_update_returns_not_found_response(): void
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $data = [
             'codigo' => '202'
         ];
@@ -96,6 +117,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_update_validation_error_response()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $turma = Turma::factory()->create();
 
         $data = [
@@ -111,6 +135,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_destroy_returns_successful_response(): void
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $turma = Turma::factory()->create();
 
         $response = $this->deleteJson("/api/v1/turmas/{$turma->id}");
@@ -122,6 +149,9 @@ class TurmaControllerTest extends TestCase
 
     public function test_destroy_returns_not_found_response(): void
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->deleteJson("/api/v1/turmas/999");
 
         $response->assertStatus(404);

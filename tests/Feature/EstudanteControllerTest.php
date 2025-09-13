@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Estudante;
 use App\Models\Turma;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,7 +14,10 @@ class EstudanteControllerTest extends TestCase
 
     public function test_index_returns_successful_response()
     {
-        $response = $this->get('/api/v1/estudantes');
+        $response = $this->actingAs(
+            User::factory()->create(),
+            'sanctum'
+        )->get('/api/v1/estudantes');
 
         $response->assertStatus(200);
         $this->assertTrue(is_array(json_decode($response->getContent())));
@@ -32,7 +36,11 @@ class EstudanteControllerTest extends TestCase
             'turma_id' => $turma->id,
         ];
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->postJson('/api/v1/estudantes', $data);
+
         $response->assertStatus(201);
         $this->assertEquals($data['matricula'], $response->json()['matricula']);
         $this->assertDatabaseHas('estudantes', $data);
@@ -49,7 +57,11 @@ class EstudanteControllerTest extends TestCase
             'turma_id' => 999, // ID de turma inexistente
         ];
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->postJson('/api/v1/estudantes', $data);
+
         $response->assertStatus(422);
         $response->assertJsonStructure(['message', 'errors']);
         $this->assertDatabaseMissing('estudantes', $data);
@@ -59,6 +71,9 @@ class EstudanteControllerTest extends TestCase
     {
         $estudante = Estudante::factory()->create();
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->get("/api/v1/estudantes/{$estudante->id}");
 
         $response->assertStatus(200);
@@ -67,6 +82,9 @@ class EstudanteControllerTest extends TestCase
 
     public function test_show_returns_not_found_response()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->get("/api/v1/estudantes/999");
 
         $response->assertStatus(404);
@@ -87,6 +105,9 @@ class EstudanteControllerTest extends TestCase
             'turma_id' => $turma->id,
         ];
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->putJson("/api/v1/estudantes/{$estudante->id}", $data);
 
         $response->assertStatus(200);
@@ -104,7 +125,12 @@ class EstudanteControllerTest extends TestCase
             'email' => 'mari@example.com',
             'turma_id' => 999, // ID de turma inexistente
         ];
+
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->putJson("/api/v1/estudantes/999", $data);
+
         $response->assertStatus(422);
         $response->assertJsonStructure(['message']);
         $this->assertDatabaseMissing('estudantes', $data);
@@ -123,6 +149,9 @@ class EstudanteControllerTest extends TestCase
             'turma_id' => 999, // ID de turma inexistente
         ];
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->putJson("/api/v1/estudantes/{$estudante->id}", $data);
 
         $response->assertStatus(422);
@@ -134,6 +163,9 @@ class EstudanteControllerTest extends TestCase
     {
         $estudante = Estudante::factory()->create();
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->deleteJson("/api/v1/estudantes/{$estudante->id}");
 
         $response->assertStatus(200);
@@ -143,6 +175,9 @@ class EstudanteControllerTest extends TestCase
 
     public function test_destroy_returns_not_found_response()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->deleteJson("/api/v1/estudantes/999");
 
         $response->assertStatus(404);

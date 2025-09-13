@@ -5,8 +5,8 @@ namespace Tests\Feature;
 use App\Models\Estudante;
 use App\Models\Medida;
 use App\Models\Ocorrencia;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class OcorrenciaControllerTest extends TestCase
@@ -15,6 +15,9 @@ class OcorrenciaControllerTest extends TestCase
 
     public function test_index_returns_successful_response()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->getJson('/api/v1/ocorrencias');
 
         $response->assertStatus(200);
@@ -34,6 +37,9 @@ class OcorrenciaControllerTest extends TestCase
             'medida_id' => $medida->id,
         ];
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->postJson('/api/v1/ocorrencias', $data);
 
         $response->assertStatus(201);
@@ -48,6 +54,9 @@ class OcorrenciaControllerTest extends TestCase
             'medida_id' => null,
         ];
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->postJson('/api/v1/ocorrencias', $data);
 
         $response->assertStatus(422);
@@ -59,6 +68,9 @@ class OcorrenciaControllerTest extends TestCase
     {
         $ocorrencia = Ocorrencia::factory()->create();
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->getJson("/api/v1/ocorrencias/{$ocorrencia->id}");
 
         $response->assertStatus(200);
@@ -67,6 +79,9 @@ class OcorrenciaControllerTest extends TestCase
 
     public function test_show_returns_not_found_response()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->getJson('/api/v1/ocorrencias/999');
 
         $response->assertStatus(404);
@@ -78,6 +93,7 @@ class OcorrenciaControllerTest extends TestCase
         $ocorrencia = Ocorrencia::factory()->create();
 
         $estudante = Estudante::factory()->create();
+        
         $medida = Medida::factory()->create([
             'descricao' => 'Advertência verbal',
         ]);
@@ -87,6 +103,9 @@ class OcorrenciaControllerTest extends TestCase
             'estudante_id' => $estudante->id,
             'medida_id' => $medida->id,
         ];
+
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
 
         $response = $this->putJson("/api/v1/ocorrencias/{$ocorrencia->id}", $updateData);
 
@@ -110,6 +129,9 @@ class OcorrenciaControllerTest extends TestCase
             'medida_id' => $medida->id,
         ];
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->putJson("/api/v1/ocorrencias/{$ocorrencia->id}", $updateData);
 
         $response->assertStatus(422);
@@ -125,6 +147,9 @@ class OcorrenciaControllerTest extends TestCase
             'medida_id' => 1,
         ];
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->putJson('/api/v1/ocorrencias/999', $data);
 
         $response->assertStatus(422);
@@ -135,6 +160,9 @@ class OcorrenciaControllerTest extends TestCase
     {
         $ocorrencia = Ocorrencia::factory()->create();
 
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->deleteJson("/api/v1/ocorrencias/{$ocorrencia->id}");
 
         $response->assertStatus(200);
@@ -143,6 +171,9 @@ class OcorrenciaControllerTest extends TestCase
 
     public function test_destroy_not_found()
     {
+        $user = User::factory()->create();
+        $this->actingAs($user, 'sanctum');
+
         $response = $this->deleteJson('/api/v1/ocorrencias/999');
 
         $response->assertStatus(404);
