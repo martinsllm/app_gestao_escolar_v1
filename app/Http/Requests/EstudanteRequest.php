@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TurmaRequest extends FormRequest
+class EstudanteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,12 @@ class TurmaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'codigo' => 'string|required|max:3|unique:turmas,codigo,' . $this->route('turma'),
+            'matricula' => 'required|unique:estudantes,matricula,' . $this->route('estudante'),
+            'nome_completo' => 'required',
+            'data_nascimento' => 'required',
+            'telefone_responsavel' => 'required',
+            'email' => 'required|email',
+            'turma_id' => 'required|exists:turmas,id',
         ];
     }
 }

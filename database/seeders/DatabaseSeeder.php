@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Estudante;
 use App\Models\Turma;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,6 +18,8 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
 
         Turma::factory(10)->create();
+
+        Estudante::factory(30)->create();
 
 
     }

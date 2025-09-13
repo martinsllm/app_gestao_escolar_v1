@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Estudante extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'matricula',
         'nome_completo',
@@ -16,7 +19,7 @@ class Estudante extends Model
     ];
 
     protected $casts = [
-        'data_nascimento' => 'date',
+        'data_nascimento' => 'date:d/m/Y',
     ];
 
     public function turma()

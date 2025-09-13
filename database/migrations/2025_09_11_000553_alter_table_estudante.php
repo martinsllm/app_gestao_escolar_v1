@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::table('estudantes', function (Blueprint $table) {
             $table->dropColumn('data_nascimento');
-            $table->date('data_nascimento')->after('nome_completo');
-            $table->string('email', 15)->nullable()->after('data_nascimento');
+            $table->dateTime('data_nascimento')->after('nome_completo');
+            $table->string('email', 30)->nullable()->after('data_nascimento');
         });
     }
 
