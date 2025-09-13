@@ -16,9 +16,7 @@ class EstudanteControllerTest extends TestCase
         $response = $this->get('/api/v1/estudantes');
 
         $response->assertStatus(200);
-
         $this->assertTrue(is_array(json_decode($response->getContent())));
-        $response->assertStatus(200);
     }
 
     public function test_store_return_successful_response()
@@ -149,6 +147,7 @@ class EstudanteControllerTest extends TestCase
 
         $response->assertStatus(404);
         $response->assertJsonStructure(['message']);
+        $response->assertJson(['message' => 'Estudante not found']);
     }
 
 
