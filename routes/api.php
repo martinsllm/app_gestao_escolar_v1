@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EstudanteController;
+use App\Http\Controllers\MedidaController;
 use App\Http\Controllers\OcorrenciaController;
 use App\Http\Controllers\TurmaController;
 use Illuminate\Http\Request;
@@ -17,5 +18,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::apiResource('turmas', TurmaController::class);
     Route::apiResource('estudantes', EstudanteController::class);
     Route::apiResource('ocorrencias', OcorrenciaController::class);
+    Route::apiResource('medidas', MedidaController::class);
 });
 

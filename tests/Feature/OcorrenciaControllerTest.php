@@ -46,7 +46,7 @@ class OcorrenciaControllerTest extends TestCase
         $this->assertDatabaseHas('ocorrencias', $data);
     }
 
-    public function test_store_validation_error()
+    public function test_store_validation_error_response()
     {
         $data = [
             'descricao' => 'teste',
@@ -93,7 +93,7 @@ class OcorrenciaControllerTest extends TestCase
         $ocorrencia = Ocorrencia::factory()->create();
 
         $estudante = Estudante::factory()->create();
-        
+
         $medida = Medida::factory()->create([
             'descricao' => 'Advertência verbal',
         ]);
