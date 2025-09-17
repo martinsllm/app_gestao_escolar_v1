@@ -22,6 +22,6 @@ class Ocorrencia extends Model
 
     public function medida()
     {
-        return $this->hasOne(Medida::class);
+        return $this->belongsTo(Medida::class);
     }
 }
