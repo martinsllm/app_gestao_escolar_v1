@@ -20,6 +20,8 @@ class Estudante extends Model
 
     protected $casts = [
         'data_nascimento' => 'date:d/m/Y',
+        'created_at' => 'datetime:d/m/Y H:i',
+        'updated_at' => 'datetime:d/m/Y H:i',
     ];
 
     public function turma()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\OcorrenciaExport;
 use App\Services\OcorrenciaService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RelatorioOcorrenciaController extends Controller
@@ -20,5 +21,12 @@ class RelatorioOcorrenciaController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function exportPDF()
+    {
+        $ocorrencias = $this->ocorrenciaService->list();
+        $pdf = Pdf::loadView('pdf.relatorio', compact('ocorrencias'));
+        return $pdf->stream('documento.pdf');
     }
 }
