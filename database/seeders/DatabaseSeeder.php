@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Estudante;
-use App\Models\Ocorrencia;
-use App\Models\Turma;
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Estudante;
+use App\Models\Medida;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,13 +14,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-
-        Turma::factory(10)->create();
-
-        Estudante::factory(30)->create();
-
-        Ocorrencia::factory(30)->create();
+        $this->call([
+            UserSeeder::class,
+            TurmaSeeder::class,
+            EstudanteSeeder::class,
+            MedidaSeeder::class,
+            OcorrenciaSeeder::class,
+        ]);
 
 
     }

@@ -17,7 +17,7 @@ class TurmaFactory extends Factory
     public function definition(): array
     {
         return [
-            'codigo' => fake()->regexify('[A-Za-z0-9]{3}')
+            'codigo' => fake()->regexify('[0-9]{3}')
         ];
     }
 }

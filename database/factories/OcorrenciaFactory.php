@@ -18,10 +18,13 @@ class OcorrenciaFactory extends Factory
      */
     public function definition(): array
     {
+        $estudante = Estudante::inRandomOrder()->first()->id ?? null;
+        $medida = Medida::inRandomOrder()->first()->id ?? null;
+
         return [
             'descricao' => $this->faker->sentence(),
-            'estudante_id' => Estudante::factory(),
-            'medida_id' => Medida::factory(),
+            'estudante_id' => $estudante,
+            'medida_id' => $medida,
         ];
     }
 }

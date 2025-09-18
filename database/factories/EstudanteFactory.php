@@ -17,17 +17,15 @@ class EstudanteFactory extends Factory
      */
     public function definition(): array
     {
-        $turma = Turma::create([
-            'codigo' => '101'
-        ]);
+        $turma = Turma::inRandomOrder()->first()->id ?? null;
 
         return [
             'matricula' => fake()->numerify('############'),
             'nome_completo' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'data_nascimento' => fake()->date(),
+            'data_nascimento' => fake()->dateTimeBetween('-18 years', '-15 years'),
             'telefone_responsavel' => fake()->phoneNumber(),
-            'turma_id' => $turma->id
+            'turma_id' => $turma
         ];
     }
 }

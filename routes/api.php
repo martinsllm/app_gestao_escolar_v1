@@ -15,7 +15,7 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+Route::prefix('v1')->group(function () {
     Route::apiResource('turmas', TurmaController::class);
     Route::apiResource('estudantes', EstudanteController::class);
     Route::apiResource('ocorrencias', OcorrenciaController::class);
@@ -23,6 +23,6 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
     Route::get('/export/ocorrencias/{extensao}', [RelatorioOcorrenciaController::class, 'export']);
 
-    Route::get('/export/pdf', [RelatorioOcorrenciaController::class, 'exportPDF']);
+    Route::get('/ocorrencias/export/pdf', [RelatorioOcorrenciaController::class, 'exportPDF']);
 });
 

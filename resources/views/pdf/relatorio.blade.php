@@ -45,7 +45,7 @@
 
 
     <h2>Relatório de Ocorrências</h2>
-
+    <p>Data do Relatório: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
     <table>
         <thead>
             <tr>
@@ -53,6 +53,7 @@
                 <th>Descrição</th>
                 <th>Data da Ocorrência</th>
                 <th>Estudante</th>
+                <th>Turma</th>
                 <th>Medida</th>
             </tr>
         </thead>
@@ -63,6 +64,7 @@
                     <td>{{ $ocorrencia->descricao }}</td>
                     <td>{{ $ocorrencia->created_at->format('d/m/Y H:i:s') }}</td>
                     <td>{{ $ocorrencia->estudante->nome_completo }}</td>
+                    <td>{{ $ocorrencia->estudante->turma->codigo }}</td>
                     <td>{{ $ocorrencia->medida->descricao }}</td>
                 </tr>
             @endforeach
