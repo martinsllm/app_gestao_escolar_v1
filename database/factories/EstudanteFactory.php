@@ -17,7 +17,7 @@ class EstudanteFactory extends Factory
      */
     public function definition(): array
     {
-        $turma = Turma::inRandomOrder()->first()->id ?? null;
+        $turma = Turma::inRandomOrder()->first()->id ?? Turma::factory()->create()->id;
 
         return [
             'matricula' => fake()->numerify('############'),

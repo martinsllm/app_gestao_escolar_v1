@@ -18,8 +18,8 @@ class OcorrenciaFactory extends Factory
      */
     public function definition(): array
     {
-        $estudante = Estudante::inRandomOrder()->first()->id ?? null;
-        $medida = Medida::inRandomOrder()->first()->id ?? null;
+        $estudante = Estudante::inRandomOrder()->first()->id ?? Estudante::factory()->create()->id;
+        $medida = Medida::inRandomOrder()->first()->id ?? Medida::factory()->create()->id;
 
         return [
             'descricao' => $this->faker->sentence(),
