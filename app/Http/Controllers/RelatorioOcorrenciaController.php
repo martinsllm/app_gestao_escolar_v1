@@ -18,15 +18,10 @@ class RelatorioOcorrenciaController extends Controller
     {
         if (in_array($extensao, ['xlsx', 'csv'])) {
             return Excel::download(new OcorrenciaExport($this->ocorrenciaService), 'ocorrencias.' . $extensao);
+        } else if($extensao == 'pdf') {
+            $ocorrencias = $this->ocorrenciaService->list();
+            $pdf = Pdf::loadView('pdf.relatorio_ocorrencias', compact('ocorrencias'));
+            return $pdf->stream('documento.pdf');
         }
-
-        return redirect('/');
-    }
-
-    public function exportPDF()
-    {
-        $ocorrencias = $this->ocorrenciaService->list();
-        $pdf = Pdf::loadView('pdf.relatorio', compact('ocorrencias'));
-        return $pdf->stream('documento.pdf');
     }
 }
