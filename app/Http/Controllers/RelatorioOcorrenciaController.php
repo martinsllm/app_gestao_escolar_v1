@@ -20,7 +20,7 @@ class RelatorioOcorrenciaController extends Controller
             return Excel::download(new OcorrenciaExport($this->ocorrenciaService), 'ocorrencias.' . $extensao);
         } else if($extensao == 'pdf') {
             $ocorrencias = $this->ocorrenciaService->list();
-            $pdf = Pdf::loadView('pdf.relatorio_ocorrencias', compact('ocorrencias'));
+            $pdf = Pdf::loadView('pdf.ocorrencias', compact('ocorrencias'));
             return $pdf->stream('documento.pdf');
         }
     }

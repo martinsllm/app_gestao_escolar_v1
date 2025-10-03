@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\TurmaExport;
 use App\Services\TurmaService;
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RelatorioTurmaController extends Controller
@@ -16,6 +16,10 @@ class RelatorioTurmaController extends Controller
     public function export($extensao, string $id){
         if(in_array($extensao, ['xlsx', 'csv'])){
             return Excel::download(new TurmaExport($this->turmaService, $id),'turma.' . $extensao);
+        } else if($extensao == 'pdf') {
+            $turma = $this->turmaService->findByPk($id);
+            $pdf = Pdf::loadView('pdf.turmas', compact('turma'));
+            return $pdf->stream('documento.pdf');
         }
     }
 }
