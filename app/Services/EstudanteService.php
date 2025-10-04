@@ -14,7 +14,7 @@ class EstudanteService
 
     public function findByPk(string $id): ?Estudante
     {
-        return Estudante::find($id);
+        return Estudante::with('turma','ocorrencias')->find($id);
     }
 
     public function store(array $data): Estudante

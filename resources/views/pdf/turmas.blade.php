@@ -3,38 +3,7 @@
 
 <head>
     <title>Turma</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-
-        .header-image {
-            width: 200px;
-            height: auto;
-
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        thead {
-            background-color: #f2f2f2;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ public_path('css/style.css') }}" />
 </head>
 
 <body>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RelatorioEstudanteController;
 use App\Http\Controllers\RelatorioOcorrenciaController;
 use App\Http\Controllers\RelatorioTurmaController;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/export/ocorrencias/{extensao}', [RelatorioOcorrenciaController::class, 'export']);
     Route::get('/export/turmas/{extensao}/{id}', [RelatorioTurmaController::class, 'export']);
-
+    Route::get('/export/estudante/{extensao}/{id}', [RelatorioEstudanteController::class, 'export']);
 });
 
 require __DIR__.'/auth.php';

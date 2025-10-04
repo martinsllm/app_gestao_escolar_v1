@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Relatório de Ocorrências</title>
+    <title>Estudante</title>
     <link rel="stylesheet" href="{{ public_path('css/style.css') }}" />
 </head>
 
@@ -13,32 +13,37 @@
     <img src="{{ public_path('img/logo.png') }}" alt="Logo da Empresa" class="header-image">
 
 
-    <h2>Relatório de Ocorrências</h2>
-    <p>Data do Relatório: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
-    <table>
+    <p>Aluno: {{ $estudante->nome_completo }}</p>
+    <p>Matrícula: {{ $estudante->matricula }}</p>
+    <p>Turma: {{ $estudante->turma->codigo }}</p>
+    <p>Data de Nascimento: {{ $estudante->data_nascimento->format('d/m/Y') }}</p>
+    <p>Telefone: {{ $estudante->telefone_responsavel }}</p>
+    <p>Email: {{ $estudante->email }}</p>
+
+    @if ($estudante->ocorrencias->count() > 0)
+    <h2>Ocorrências</h2>
+        <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Descrição</th>
-                <th>Data da Ocorrência</th>
-                <th>Estudante</th>
-                <th>Turma</th>
                 <th>Medida</th>
+                <th>Data de aplicação</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($ocorrencias as $ocorrencia)
+            @foreach ($estudante->ocorrencias as $ocorrencia)
                 <tr>
                     <td>{{ $ocorrencia->id }}</td>
                     <td>{{ $ocorrencia->descricao }}</td>
-                    <td>{{ $ocorrencia->created_at->format('d/m/Y H:i:s') }}</td>
-                    <td>{{ $ocorrencia->estudante->nome_completo }}</td>
-                    <td>{{ $ocorrencia->estudante->turma->codigo }}</td>
                     <td>{{ $ocorrencia->medida->descricao }}</td>
+                    <td>{{ $ocorrencia->created_at->format('d/m/Y') }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    @endif
+    
 </body>
 
 </html>

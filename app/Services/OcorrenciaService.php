@@ -15,7 +15,7 @@ class OcorrenciaService
 
     public function findByPk(string $id): ?Ocorrencia
     {
-        return Ocorrencia::find($id);
+        return Ocorrencia::with('estudante')->find($id);
     }
 
     public function store(array $data): Ocorrencia
