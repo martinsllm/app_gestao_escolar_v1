@@ -15,6 +15,8 @@
 
     <h2>Turma: {{ $turma->codigo }}</h2>
     <p>Data do Relatório: {{ \Carbon\Carbon::now()->format('d/m/Y') }}</p>
+
+    <h3>Lista de Estudantes</h3>
     <table>
         <thead>
             <tr>

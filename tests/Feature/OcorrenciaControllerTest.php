@@ -21,7 +21,7 @@ class OcorrenciaControllerTest extends TestCase
         $response = $this->getJson('/api/v1/ocorrencias');
 
         $response->assertStatus(200);
-        $this->assertTrue(is_array(json_decode($response->getContent())));
+        $this->assertTrue(is_object(json_decode($response->getContent())));
     }
 
     public function test_store_returns_successful_response()

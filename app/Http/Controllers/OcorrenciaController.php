@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OcorrenciaRequest;
 use App\Services\OcorrenciaService;
+use Illuminate\Http\Request;
 
 class OcorrenciaController extends Controller
 {
@@ -15,9 +16,11 @@ class OcorrenciaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $result = $this->ocorrenciaService->list();
+        $query = $this->ocorrenciaService->list($request);
+
+        $result = $query->paginate(10);
 
         return response()->json($result, 200);
     }

@@ -15,7 +15,7 @@ class OcorrenciaExport implements FromCollection, WithHeadings, WithMapping
 
     public function collection()
     {
-        return $this->ocorrenciaService->list();
+        return $this->ocorrenciaService->listAll();
     }
 
     public function headings(): array
