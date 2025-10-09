@@ -3,13 +3,22 @@
 namespace App\Services;
 
 use App\Models\Estudante;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Builder;
 
 class EstudanteService
 {
-    public function list(): Collection
-    {
-        return Estudante::all();
+    public function list($request): Builder{
+        $query = Estudante::query();
+
+        if($request->has('filtro')){
+            $filtros = explode(';', $request->filtro);
+            foreach($filtros as $key => $condicao){
+                $c = explode(':', $condicao);
+                $query->where($c[0], $c[1], $c[2]);
+            }
+        }
+        
+        return $query;
     }
 
     public function findByPk(string $id): ?Estudante

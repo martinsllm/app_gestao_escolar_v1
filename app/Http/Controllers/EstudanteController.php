@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EstudanteRequest;
 use App\Services\EstudanteService;
+use Illuminate\Http\Request;
 
 class EstudanteController extends Controller
 {
@@ -15,9 +16,11 @@ class EstudanteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $result = $this->estudanteService->list();
+        $query = $this->estudanteService->list($request);
+
+        $result = $query->paginate(10);
 
         return response()->json($result, 200);
     }

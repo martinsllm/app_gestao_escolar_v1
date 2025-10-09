@@ -20,7 +20,7 @@ class EstudanteControllerTest extends TestCase
         )->get('/api/v1/estudantes');
 
         $response->assertStatus(200);
-        $this->assertTrue(is_array(json_decode($response->getContent())));
+        $this->assertTrue(is_object(json_decode($response->getContent())));
     }
 
     public function test_store_return_successful_response()
