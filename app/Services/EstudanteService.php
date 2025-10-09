@@ -3,19 +3,23 @@
 namespace App\Services;
 
 use App\Models\Estudante;
+use App\Traits\FilterTrait;
 use Illuminate\Database\Eloquent\Builder;
+
 
 class EstudanteService
 {
-    public function list($request): Builder{
-        $query = Estudante::query();
+    use FilterTrait;
+
+    public function __construct(public Estudante $estudante) {
+        $this->estudante = $estudante;
+    }
+
+    public function list($request): Builder {
+        $query = $this->estudante->query();
 
         if($request->has('filtro')){
-            $filtros = explode(';', $request->filtro);
-            foreach($filtros as $key => $condicao){
-                $c = explode(':', $condicao);
-                $query->where($c[0], $c[1], $c[2]);
-            }
+            $this->filter($query, $request->filtro);
         }
         
         return $query;
@@ -23,12 +27,12 @@ class EstudanteService
 
     public function findByPk(string $id): ?Estudante
     {
-        return Estudante::with('turma','ocorrencias')->find($id);
+        return $this->estudante->with('turma','ocorrencias')->find($id);
     }
 
     public function store(array $data): Estudante
     {
-        return Estudante::create($data);
+        return $this->estudante->create($data);
     }
 
     public function update(Estudante $estudante, array $data): Estudante

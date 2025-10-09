@@ -3,21 +3,24 @@
 namespace App\Services;
 
 use App\Models\Ocorrencia;
+use App\Traits\FilterTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class OcorrenciaService
 {
 
+    use FilterTrait;
+
+    public function __construct(public Ocorrencia $ocorrencia){
+        $this->ocorrencia = $ocorrencia;
+    }
+
     public function list($request): Builder {
-        $query = Ocorrencia::query();
+        $query = $this->ocorrencia->query();
 
         if($request->has('filtro')){
-            $filtros = explode(';', $request->filtro);
-            foreach($filtros as $key => $condicao){
-                $c = explode(':', $condicao);
-                $query->where($c[0], $c[1], $c[2]);
-            }
+           $this->filter($query, $request->filtro);
         }
         
         return $query;
@@ -25,17 +28,17 @@ class OcorrenciaService
 
     public function listAll(): Collection
     {
-        return Ocorrencia::all();
+        return $this->ocorrencia->all();
     }
 
     public function findByPk(string $id): ?Ocorrencia
     {
-        return Ocorrencia::with('estudante')->find($id);
+        return $this->ocorrencia->with('estudante')->find($id);
     }
 
     public function store(array $data): Ocorrencia
     {
-        return Ocorrencia::create($data);
+        return $this->ocorrencia->create($data);
     }
 
     public function update(Ocorrencia $ocorrencia, array $data): Ocorrencia

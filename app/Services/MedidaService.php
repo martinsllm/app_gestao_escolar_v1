@@ -7,19 +7,24 @@ use Illuminate\Database\Eloquent\Collection;
 
 class MedidaService
 {
+    public function __construct(public Medida $medida)
+    {
+        $this->medida = $medida;
+    }
+
     public function list(): Collection
     {
-        return Medida::all();
+        return $this->medida::all();
     }
 
     public function findByPk(string $id): ?Medida
     {
-        return Medida::findOrFail($id);
+        return $this->medida->findOrFail($id);
     }
 
     public function store(array $data): Medida
     {
-        return Medida::create($data);
+        return $this->medida->create($data);
     }
 
     public function update(Medida $medida, array $data): Medida
