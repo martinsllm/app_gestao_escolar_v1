@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ImportRequest;
+use App\Services\EstudanteService;
 
 class ImportEstudantesController extends Controller
 {
-    public function import(){
-        
+    public function __construct(public EstudanteService $estudanteService){
+
+    }
+
+    public function import(ImportRequest $request){
+        dd("teste");
     }
 }

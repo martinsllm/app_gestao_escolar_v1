@@ -3,7 +3,6 @@
 use App\Http\Controllers\ExportEstudanteController;
 use App\Http\Controllers\ExportOcorrenciaController;
 use App\Http\Controllers\ExportTurmaController;
-use App\Http\Controllers\ImportEstudantesController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +21,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/export/ocorrencias/{extensao}', [ExportOcorrenciaController::class, 'export'])->name('export.ocorrencias');
     Route::get('/export/turmas/{extensao}/{id}', [ExportTurmaController::class, 'export'])->name('export.turmas');
     Route::get('/export/estudante/{extensao}/{id}', [ExportEstudanteController::class, 'export'])->name('export.estudante');
-    Route::post('/import/estudantes', [ImportEstudantesController::class, 'import'])->name('import.estudantes');
 });
 
 require __DIR__.'/auth.php';
