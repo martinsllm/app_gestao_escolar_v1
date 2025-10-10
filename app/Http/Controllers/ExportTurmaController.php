@@ -7,7 +7,7 @@ use App\Services\TurmaService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 
-class RelatorioTurmaController extends Controller
+class ExportTurmaController extends Controller
 {
     public function __construct(public TurmaService $turmaService){
 

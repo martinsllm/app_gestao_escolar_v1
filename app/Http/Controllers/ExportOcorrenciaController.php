@@ -7,7 +7,7 @@ use App\Services\OcorrenciaService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Maatwebsite\Excel\Facades\Excel;
 
-class RelatorioOcorrenciaController extends Controller
+class ExportOcorrenciaController extends Controller
 {
     public function __construct(public OcorrenciaService $ocorrenciaService)
     {

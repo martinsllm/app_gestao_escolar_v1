@@ -6,7 +6,7 @@ use App\Services\EstudanteService;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class RelatorioEstudanteController extends Controller
+class ExportEstudanteController extends Controller
 {
     public function __construct(public EstudanteService $estudanteService){}
 
