@@ -40,7 +40,7 @@ class EstudanteService
         return $this->estudante->create($data);
     }
 
-    public function insert(array $data){
+    public function insertCsv(array $data){
         $this->estudante->insert($data);
     }
 

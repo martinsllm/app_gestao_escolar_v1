@@ -18,9 +18,9 @@ class TurmaService
         return $this->turma->all();
     }
 
-    public function getId(string $codigo): ?string
+    public function findByCodigo(string $codigo): ?Turma
     {
-        return $this->turma->where("codigo", $codigo)->first()->id;
+        return $this->turma->where("codigo", $codigo)->first();
     }
 
     public function findByPk(string $id): ?Turma
@@ -46,4 +46,3 @@ class TurmaService
     }
 
 }
-

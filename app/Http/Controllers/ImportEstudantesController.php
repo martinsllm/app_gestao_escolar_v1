@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ImportRequest;
-use App\Models\Estudante;
 use App\Services\EstudanteService;
 use App\Services\TurmaService;
 use DateTime;
@@ -19,38 +18,41 @@ class ImportEstudantesController extends Controller
 
         $fileData = array_map('str_getcsv', file($request->file('file')));
 
-        $separator = ';';
-
         $arrayValue = [];
 
         $errors=[];
 
         foreach ($fileData as $row) {
-           $values = explode($separator, $row[0]);
+           $values = explode(';', $row[0]);
 
            if(count($values) != count($headers)){
                 continue; //Ignora linhas inválidas
            }
 
-           $estudanteData = array_combine($headers, $values);
+           $data = array_combine($headers, $values);
 
-           //busca id da turma pelo nome
-           $turmaId = $this->turmaService->getId($estudanteData['turma']);
+           //verifica se turma informada existe
+           $turma = $this->turmaService->findByCodigo($data['turma']);
 
-           $matriculaExists = $this->estudanteService->findMatricula($estudanteData['matricula']);
+           if(!$turma){
+                $errors[] = $data['turma'];
+                continue; //Ignora linhas inválidas
+           }
+
+           $matriculaExists = $this->estudanteService->findMatricula($data['matricula']);
 
            if($matriculaExists){
-                $errors[] = $estudanteData['matricula'];
+                $errors[] = $data['matricula'];
                 continue; //Ignora linhas inválidas
            }
 
            $arrayValue[] = [
-                'matricula' => $estudanteData['matricula'],
-                'nome_completo'=> $estudanteData['nome_completo'],
-                'data_nascimento' => DateTime::createFromFormat('d/m/Y',$estudanteData['data_nascimento']),
-                'turma_id' => $turmaId,
-                'telefone_responsavel' => $estudanteData['telefone_responsavel'],
-                'email' => $estudanteData['email'],
+                'matricula' => $data['matricula'],
+                'nome_completo'=> $data['nome_completo'],
+                'data_nascimento' => DateTime::createFromFormat('d/m/Y',$data['data_nascimento']),
+                'turma_id' => $turma->id,
+                'telefone_responsavel' => $data['telefone_responsavel'],
+                'email' => $data['email'],
            ];
            
         }
@@ -59,10 +61,8 @@ class ImportEstudantesController extends Controller
             return response()->json(['message' => 'Data not imported'], 422);
         }
 
-        $this->estudanteService->insert($arrayValue);
+        $this->estudanteService->insertCsv($arrayValue);
 
-        return response()->json(['message' => 'Data imported successfully'], 200);
-
-        
+        return response()->json(['message' => 'Data imported successfully'], 200); 
     }
 }
