@@ -14,7 +14,7 @@ class MedidaService
 
     public function list(): Collection
     {
-        return $this->medida::all();
+        return $this->medida->all();
     }
 
     public function findByPk(string $id): ?Medida

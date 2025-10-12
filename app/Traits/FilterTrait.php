@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 
-trait FilterTrait{
+trait FilterTrait {
 
     public function filter(Builder $query, $request): Builder {
         $filtros = explode(';', $request);

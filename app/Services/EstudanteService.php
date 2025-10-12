@@ -30,18 +30,9 @@ class EstudanteService
         return $this->estudante->with('turma','ocorrencias')->find($id);
     }
 
-    public function findMatricula(string $matricula): ?Estudante
-    {
-        return $this->estudante->where('matricula', $matricula)->first();
-    }
-
     public function store(array $data): Estudante
     {
         return $this->estudante->create($data);
-    }
-
-    public function insertCsv(array $data){
-        $this->estudante->insert($data);
     }
 
     public function update(Estudante $estudante, array $data): Estudante
