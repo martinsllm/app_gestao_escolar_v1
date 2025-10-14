@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TurmaRequest;
 use App\Services\TurmaService;
+use App\Traits\ApiResponse;
 
 class TurmaController extends Controller
 {
+    use ApiResponse;
+
     public function __construct(public TurmaService $turmaService)
     {
 
@@ -19,7 +22,7 @@ class TurmaController extends Controller
     {
         $result = $this->turmaService->list();
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -29,7 +32,7 @@ class TurmaController extends Controller
     {
         $result = $this->turmaService->store($request->all());
 
-        return response()->json($result, 201);
+        return $this->response($result, 201);
     }
 
     /**
@@ -40,10 +43,10 @@ class TurmaController extends Controller
         $result = $this->turmaService->findByPk($id);
 
         if (!$result) {
-            return response()->json(['message' => 'Turma not found'], 404);
+            return $this->response(['message' => 'Turma not found'], 404);
         }
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -54,11 +57,11 @@ class TurmaController extends Controller
         $turma = $this->turmaService->findByPk($id);
 
         if (!$turma) {
-            return response()->json(['message' => 'Turma not found'], 404);
+            return $this->response(['message' => 'Turma not found'], 404);
         }
 
         $result = $this->turmaService->update($turma, $request->all());
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -69,11 +72,11 @@ class TurmaController extends Controller
         $turma = $this->turmaService->findByPk($id);
 
         if (!$turma) {
-            return response()->json(['message' => 'Turma not found'], 404);
+            return $this->response(['message' => 'Turma not found'], 404);
         }
 
         $this->turmaService->delete($turma);
 
-        return response()->json(['message' => 'Turma deleted successfully'], 200);
+        return $this->response(['message' => 'Turma deleted successfully'], 200);
     }
 }

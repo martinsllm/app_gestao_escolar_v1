@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EstudanteRequest;
 use App\Services\EstudanteService;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class EstudanteController extends Controller
 {
+
+    use ApiResponse;
+
     public function __construct(public EstudanteService $estudanteService)
     {
 
@@ -22,7 +26,7 @@ class EstudanteController extends Controller
 
         $result = $query->paginate(10);
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -32,7 +36,7 @@ class EstudanteController extends Controller
     {
         $result = $this->estudanteService->store($request->all());
 
-        return response()->json($result, 201);
+        return $this->response($result, 201);
     }
 
     /**
@@ -43,10 +47,10 @@ class EstudanteController extends Controller
         $result = $this->estudanteService->findByPk($id);
 
         if (!$result) {
-            return response()->json(['message' => 'Estudante not found'], 404);
+            return $this->response(['message' => 'Estudante not found'], 404);
         }
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -57,12 +61,12 @@ class EstudanteController extends Controller
         $estudante = $this->estudanteService->findByPk($id);
 
         if (!$estudante) {
-            return response()->json(['message' => 'Estudante not found'], 404);
+            return $this->response(['message' => 'Estudante not found'], 404);
         }
 
         $result = $this->estudanteService->update($estudante, $request->all());
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -73,11 +77,11 @@ class EstudanteController extends Controller
         $estudante = $this->estudanteService->findByPk($id);
 
         if (!$estudante) {
-            return response()->json(['message' => 'Estudante not found'], 404);
+           return $this->response(['message' => 'Estudante not found'], 404);
         }
 
         $this->estudanteService->delete($estudante);
 
-        return response()->json(['message' => 'Estudante deleted successfully'], 200);
+        return $this->response(['message' => 'Estudante deleted successfully'], 200);
     }
 }

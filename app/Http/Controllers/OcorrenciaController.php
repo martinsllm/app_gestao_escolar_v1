@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OcorrenciaRequest;
 use App\Services\OcorrenciaService;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
 class OcorrenciaController extends Controller
 {
+
+    use ApiResponse;
+
     public function __construct(public OcorrenciaService $ocorrenciaService)
     {
 
@@ -22,7 +26,7 @@ class OcorrenciaController extends Controller
 
         $result = $query->paginate(10);
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -32,7 +36,7 @@ class OcorrenciaController extends Controller
     {
         $result = $this->ocorrenciaService->store($request->all());
 
-        return response()->json($result, 201);
+        return $this->response($result, 201);
     }
 
     /**
@@ -43,10 +47,10 @@ class OcorrenciaController extends Controller
         $result = $this->ocorrenciaService->findByPk($id);
 
         if (!$result) {
-            return response()->json(['message' => 'Ocorrencia not found'], 404);
+            return $this->response(['message' => 'Ocorrencia not found'], 404);
         }
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -57,12 +61,12 @@ class OcorrenciaController extends Controller
         $ocorrencia = $this->ocorrenciaService->findByPk($id);
 
         if (!$ocorrencia) {
-            return response()->json(['message' => 'Ocorrencia not found'], 404);
+            return $this->response(['message' => 'Ocorrencia not found'], 404);
         }
 
         $result = $this->ocorrenciaService->update($ocorrencia, $request->all());
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -73,11 +77,11 @@ class OcorrenciaController extends Controller
         $ocorrencia = $this->ocorrenciaService->findByPk($id);
 
         if (!$ocorrencia) {
-            return response()->json(['message' => 'Ocorrencia not found'], 404);
+            return $this->response(['message' => 'Ocorrencia not found'], 404);
         }
 
         $this->ocorrenciaService->delete($ocorrencia);
 
-        return response()->json(['message' => 'Ocorrencia deleted successfully'], 200);
+        return $this->response(['message' => 'Ocorrencia deleted successfully'], 200);
     }
 }

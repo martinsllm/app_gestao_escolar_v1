@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ImportRequest;
 use App\Jobs\ImportCsvJob;
+use App\Traits\ApiResponse;
 
 class ImportEstudantesController extends Controller
 {
+
+    use ApiResponse;
+    
     public function __construct(){
 
     }
@@ -19,6 +23,6 @@ class ImportEstudantesController extends Controller
 
      ImportCsvJob::dispatchSync($path);
 
-     return response()->json(['message' => 'Data is being imported'], 200); 
+     return $this->response(['message' => 'Data is being imported'], 200); 
     }
 }

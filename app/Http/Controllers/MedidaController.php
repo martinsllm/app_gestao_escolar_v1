@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MedidaRequest;
 use App\Services\MedidaService;
-use Illuminate\Http\Request;
+use App\Traits\ApiResponse;
 
 class MedidaController extends Controller
 {
+    use ApiResponse;
+
     public function __construct(public MedidaService $medidaService)
     {
 
@@ -20,7 +22,7 @@ class MedidaController extends Controller
     {
         $result = $this->medidaService->list();
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -30,7 +32,7 @@ class MedidaController extends Controller
     {
         $result = $this->medidaService->store($request->all());
 
-        return response()->json($result, 201);
+        return $this->response($result, 201);
     }
 
     /**
@@ -41,10 +43,10 @@ class MedidaController extends Controller
         $result = $this->medidaService->findByPk($id);
 
         if (!$result) {
-            return response()->json(['message' => 'Medida not found'], 404);
+            return $this->response(['message' => 'Medida not found'], 404);
         }
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -55,12 +57,12 @@ class MedidaController extends Controller
         $medida = $this->medidaService->findByPk($id);
 
         if (!$medida) {
-            return response()->json(['message' => 'Medida not found'], 404);
+            return $this->response(['message' => 'Medida not found'], 404);
         }
 
         $result = $this->medidaService->update($medida, $request->all());
 
-        return response()->json($result, 200);
+        return $this->response($result, 200);
     }
 
     /**
@@ -71,11 +73,11 @@ class MedidaController extends Controller
         $medida = $this->medidaService->findByPk($id);
 
         if (!$medida) {
-            return response()->json(['message' => 'Medida not found'], 404);
+            return $this->response(['message' => 'Medida not found'], 404);
         }
 
         $this->medidaService->delete($medida);
 
-        return response()->json(['message' => 'Medida deleted successfully'], 200);
+        return $this->response(['message' => 'Medida deleted successfully'], 200);
     }
 }
