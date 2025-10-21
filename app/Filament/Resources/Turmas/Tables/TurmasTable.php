@@ -16,8 +16,10 @@ class TurmasTable
     {
         return $table
             ->columns([
-                TextColumn::make('codigo'),
+                TextColumn::make('codigo')
+                    ->searchable(),
             ])
+            ->defaultSort('codigo', 'asc')
             ->filters([
                 //
             ])

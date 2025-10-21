@@ -11,7 +11,10 @@ class TurmaForm
     {
         return $schema
             ->components([
-                TextInput::make('codigo')->required(),
+                TextInput::make('codigo')
+                    ->required()
+                    ->unique()
+                    ->rules('numeric'),
             ]);
     }
 }
