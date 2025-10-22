@@ -4,9 +4,9 @@ namespace App\Filament\Resources\Turmas\Pages;
 
 use App\Filament\Resources\Turmas\TurmaResource;
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\ManageRecords;
 
-class ListTurmas extends ListRecords
+class ManageTurmas extends ManageRecords
 {
     protected static string $resource = TurmaResource::class;
 

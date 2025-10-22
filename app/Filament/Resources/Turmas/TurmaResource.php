@@ -2,16 +2,18 @@
 
 namespace App\Filament\Resources\Turmas;
 
-use App\Filament\Resources\Turmas\Pages\CreateTurma;
-use App\Filament\Resources\Turmas\Pages\EditTurma;
-use App\Filament\Resources\Turmas\Pages\ListTurmas;
-use App\Filament\Resources\Turmas\Schemas\TurmaForm;
-use App\Filament\Resources\Turmas\Tables\TurmasTable;
+use App\Filament\Resources\Turmas\Pages\ManageTurmas;
 use App\Models\Turma;
 use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class TurmaResource extends Resource
@@ -22,27 +24,41 @@ class TurmaResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return TurmaForm::configure($schema);
+        return $schema
+            ->components([
+                TextInput::make('codigo')
+                    ->required()
+                    ->unique()
+                    ->rules('numeric'),
+            ]);
     }
 
     public static function table(Table $table): Table
     {
-        return TurmasTable::configure($table);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
+        return $table
+            ->columns([
+                TextColumn::make('codigo')
+                    ->searchable(),
+            ])
+            ->defaultSort('codigo', 'asc')
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListTurmas::route('/'),
-            'create' => CreateTurma::route('/create'),
-            'edit' => EditTurma::route('/{record}/edit'),
+            'index' => ManageTurmas::route('/'),
         ];
     }
 }
