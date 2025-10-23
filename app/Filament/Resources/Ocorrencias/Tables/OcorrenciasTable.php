@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Estudantes\Tables;
+namespace App\Filament\Resources\Ocorrencias\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -9,23 +9,24 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class EstudantesTable
+class OcorrenciasTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('matricula')->searchable(),
-                TextColumn::make('nome_completo')->searchable(),
-                TextColumn::make('turma.codigo')->searchable(),
-                TextColumn::make('data_nascimento')->date('d/m/Y'),
+                TextColumn::make('descricao'),
+                TextColumn::make('estudante.nome_completo')
+                    ->searchable(),
+                TextColumn::make('medida.descricao')
+                    ->searchable()
             ])
             ->filters([
                 //
             ])
             ->recordActions([
                 EditAction::make(),
-                DeleteAction::make()
+                DeleteAction::make(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

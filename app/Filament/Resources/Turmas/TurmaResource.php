@@ -38,7 +38,7 @@ class TurmaResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('codigo')
-                    ->searchable(),
+                    ->searchable(isIndividual:true , isGlobal: false),
             ])
             ->defaultSort('codigo', 'asc')
             ->filters([
