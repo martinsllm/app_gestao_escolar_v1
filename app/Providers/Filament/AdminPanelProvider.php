@@ -61,7 +61,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->navigationItems([
                 NavigationItem::make('Home')
-                    ->url('http://127.0.0.1:8000')
+                    ->url(env('APP_URL'))
                     ->icon('heroicon-s-home'),
             ]);
     }
