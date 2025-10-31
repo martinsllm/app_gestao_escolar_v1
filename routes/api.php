@@ -13,7 +13,6 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('turmas', TurmaController::class);
-    Route::apiResource('estudantes', EstudanteController::class);
     Route::apiResource('ocorrencias', OcorrenciaController::class);
     Route::apiResource('medidas', MedidaController::class);
     Route::post('/import/estudantes', [ImportEstudantesController::class, 'import'])->name('import.estudantes');

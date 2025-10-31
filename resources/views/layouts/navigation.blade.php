@@ -20,6 +20,9 @@
                             {{ __('Admin') }}
                         </x-nav-link>
                     @endcan
+                    <x-nav-link :href="route('estudantes.index')" :active="request()->routeIs('estudantes.index')">
+                        {{ __('Estudantes') }}
+                    </x-nav-link>
                 </div>
             </div>
 

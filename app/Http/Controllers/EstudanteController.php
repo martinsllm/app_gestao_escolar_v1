@@ -24,9 +24,9 @@ class EstudanteController extends Controller
     {
         $query = $this->estudanteService->list($request);
 
-        $result = $query->paginate(10);
+        $result = $query->paginate(5);
 
-        return $this->response($result, 200);
+        return view('pages.estudantes.index', compact('result'));
     }
 
     /**
