@@ -17,9 +17,9 @@ class EstudanteService
 
     public function list($request): Builder {
         $query = $this->estudante->query();
-
-        if($request->has('filtro')){
-            $this->filter($query, $request->filtro);
+        
+        if($request->has('matricula')){
+            $this->filter($query, $request->query());
         }
         
         return $query;

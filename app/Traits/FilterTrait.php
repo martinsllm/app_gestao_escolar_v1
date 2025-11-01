@@ -6,15 +6,11 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait FilterTrait {
 
-    public function filter(Builder $query, $request): Builder {
-        $filtros = explode(';', $request);
-
-        foreach($filtros as $key => $condicao){
-            $c = explode(':', $condicao);
-            $query->where($c[0], $c[1], $c[2]);
+    public function filter(Builder $query, $request) {
+        foreach($request as $key => $value){
+            $query->where($key, 'like', "%$value%");
         }
         
-        return $query;
     }
 
 }
