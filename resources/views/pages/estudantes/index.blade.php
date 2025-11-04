@@ -13,17 +13,18 @@
                     <form action="{{ route('estudantes.index') }}" method="GET">
                         <div class="flex flex-wrap -mx-3 mb-6">
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Matrícula</label>
-                                <input type="text" name="matricula" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Matrícula" value="{{ $request->matricula ?? '' }}">
+                                <x-label>Matrícula</x-label>
+                                <x-input name="matricula" placeholder="Matrícula" value="{{ $request->matricula ?? '' }}" />
                                 <p class="text-xs italic">Opcional. Informe a matrícula do estudante</p>
                             </div>
                             <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Nome</label>
-                                <input type="text" name="nome_completo" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded-md py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" placeholder="Nome" value="{{ $request->nome ?? '' }}">
+                                <x-label>Nome</x-label>
+                                <x-input name="nome_completo" placeholder="Nome" value="{{ $request->nome ?? '' }}" />
                                 <p class="text-xs italic">Opcional. Informe o nome do estudante</p>
                             </div>
                         </div>
                         <div class="w-full px-3 md:mb-0 mt-5" align="right">
+                            <x-button type="button" class="bg-green-600 hover:bg-green-700 focus:bg-green-700 active:bg-gray-900">Adicionar</x-button>
                             <x-button>Pesquisar</x-button>
                         </div>
                     </form>
