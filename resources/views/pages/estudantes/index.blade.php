@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="w-full px-3 md:mb-0 mt-5" align="right">
-                            <button class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900" type="submit">Pesquisar</button>
+                            <x-button>Pesquisar</x-button>
                         </div>
                     </form>
                 </div>
@@ -51,7 +51,7 @@
                                     <td class="px-6 py-4">{{ $e->nome_completo }}</td>
                                     <td class="px-6 py-4">{{ $e->turma->codigo }}</td>
                                     <td class="px-6 py-4">{{ $e->email }}</td>
-                                    <td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4"><a href="{{ route('export.estudante', $e->id) }}" target="_blank">Consultar Relatório</a></td>
                                 </tr>
                             @endforeach
                         </x-slot>

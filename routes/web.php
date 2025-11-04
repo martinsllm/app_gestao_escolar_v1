@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::apiResource('estudantes', EstudanteController::class);
     Route::get('/export/ocorrencias/{extensao}', [ExportOcorrenciaController::class, 'export'])->name('export.ocorrencias');
     Route::get('/export/turmas/{extensao}/{id}', [ExportTurmaController::class, 'export'])->name('export.turmas');
-    Route::get('/export/estudante/{extensao}/{id}', [ExportEstudanteController::class, 'export'])->name('export.estudante');
+    Route::get('/export/estudante/{id}', [ExportEstudanteController::class, 'export'])->name('export.estudante');
 });
 
 require __DIR__.'/auth.php';
