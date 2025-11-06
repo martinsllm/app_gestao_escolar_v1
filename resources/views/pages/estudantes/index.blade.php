@@ -1,4 +1,3 @@
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -24,7 +23,7 @@
                             </div>
                         </div>
                         <div class="w-full px-3 md:mb-0 mt-5" align="right">
-                            <x-button type="button" class="bg-green-600 hover:bg-green-700 focus:bg-green-700 active:bg-gray-900">Adicionar</x-button>
+                            <x-button type="button" class="bg-green-600 hover:bg-green-700 focus:bg-green-700 active:bg-green-900">Adicionar</x-button>
                             <x-button>Pesquisar</x-button>
                         </div>
                     </form>
@@ -62,7 +61,5 @@
             </div>
         </div>
     </div>
-
-   
 
 </x-app-layout>
