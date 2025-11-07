@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\OcorrenciaRequest;
 use App\Services\OcorrenciaService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
-class OcorrenciaController extends Controller
+class OcorrenciaControllerApi extends Controller
 {
 
     use ApiResponse;

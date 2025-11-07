@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MedidaRequest;
 use App\Services\MedidaService;
 use App\Traits\ApiResponse;
 
-class MedidaController extends Controller
+class MedidaControllerApi extends Controller
 {
     use ApiResponse;
 

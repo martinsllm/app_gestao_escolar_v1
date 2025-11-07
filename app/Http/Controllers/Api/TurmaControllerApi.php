@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\TurmaRequest;
 use App\Services\TurmaService;
 use App\Traits\ApiResponse;
 
-class TurmaController extends Controller
+class TurmaControllerApi extends Controller
 {
     use ApiResponse;
 

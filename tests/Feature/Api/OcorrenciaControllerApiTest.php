@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api;
 
 use App\Models\Estudante;
 use App\Models\Medida;
@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class OcorrenciaControllerTest extends TestCase
+class OcorrenciaControllerApiTest extends TestCase
 {
     use RefreshDatabase;
 

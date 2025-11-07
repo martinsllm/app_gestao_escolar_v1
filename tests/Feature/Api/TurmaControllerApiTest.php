@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api;
 
 use App\Models\Turma;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TurmaControllerTest extends TestCase
+class TurmaControllerApiTest extends TestCase
 {
     use RefreshDatabase;
 

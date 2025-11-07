@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportRequest;
 use App\Jobs\ImportCsvJob;
 use App\Traits\ApiResponse;

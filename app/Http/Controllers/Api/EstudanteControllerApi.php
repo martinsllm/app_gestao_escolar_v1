@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\EstudanteRequest;
 use App\Services\EstudanteService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 
-class EstudanteController extends Controller
+class EstudanteControllerApi extends Controller
 {
 
     use ApiResponse;
@@ -24,9 +25,9 @@ class EstudanteController extends Controller
     {
         $query = $this->estudanteService->list($request);
 
-        $result = $query->paginate(5);
+        $result = $query->paginate(10);
 
-        return view('pages.estudantes.index', compact('result'));
+        return $this->response($result, 200);
     }
 
     /**

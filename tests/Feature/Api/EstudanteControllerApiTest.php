@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api;
 
 use App\Models\Estudante;
 use App\Models\Turma;
@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class EstudanteControllerTest extends TestCase
+class EstudanteControllerApiTest extends TestCase
 {
     use RefreshDatabase;
 
