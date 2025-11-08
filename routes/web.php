@@ -16,7 +16,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('estudantes', [EstudanteController::class, 'index'])->name('estudantes'); 
+    Route::get('estudantes', [EstudanteController::class, 'index'])->name('estudantes.index'); 
     Route::get('/export/ocorrencias/{extensao}', action: [ExportOcorrenciaController::class, 'export'])->name('export.ocorrencias');
     Route::get('/export/turmas/{extensao}/{id}', [ExportTurmaController::class, 'export'])->name('export.turmas');
     Route::get('/export/estudante/{id}', [ExportEstudanteController::class, 'export'])->name('export.estudante');

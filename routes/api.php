@@ -10,7 +10,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1')->name('api.')->group(function () {
     Route::apiResource('estudantes', EstudanteControllerApi::class);
     Route::apiResource('turmas', TurmaControllerApi::class);
     Route::apiResource('ocorrencias', OcorrenciaControllerApi::class);
