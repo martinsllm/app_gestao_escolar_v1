@@ -5,14 +5,10 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportRequest;
 use App\Jobs\ImportCsvJob;
-use App\Traits\ApiResponse;
 use Exception;
 
 class ImportEstudantesController extends Controller
 {
-
-    use ApiResponse;
-    
     public function __construct(){
 
     }
@@ -32,7 +28,7 @@ class ImportEstudantesController extends Controller
 
         return back()->with('message', 'File uploaded successfully!');
      } catch (Exception $e) {
-        return back()->with('message', 'File upload failed.');
+        return back()->with('message', 'File upload failed!');
      }
     }
 }
