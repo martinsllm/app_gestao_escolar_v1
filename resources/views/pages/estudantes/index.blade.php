@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="w-full px-3 md:mb-0 mt-5" align="right">
-                            <x-button type="button" class="bg-green-600 hover:bg-green-700 focus:bg-green-700 active:bg-green-900">Adicionar</x-button>
+                            <a class="uppercase text-sm px-5 py-2.5" href="{{ route('estudantes.import') }}">+ Adicionar</a>
                             <x-button>Pesquisar</x-button>
                         </div>
                     </form>

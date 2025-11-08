@@ -17,10 +17,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('estudantes', [EstudanteController::class, 'index'])->name('estudantes.index'); 
+    Route::get('/estudantes/import', [ImportEstudantesController::class, 'create'])->name('estudantes.import');
+    Route::post('/import/estudantes', [ImportEstudantesController::class, 'import'])->name('import.estudantes');
     Route::get('/export/ocorrencias/{extensao}', action: [ExportOcorrenciaController::class, 'export'])->name('export.ocorrencias');
     Route::get('/export/turmas/{extensao}/{id}', [ExportTurmaController::class, 'export'])->name('export.turmas');
     Route::get('/export/estudante/{id}', [ExportEstudanteController::class, 'export'])->name('export.estudante');
-    Route::post('/import/estudantes', [ImportEstudantesController::class, 'import'])->name('import.estudantes');
 });
 
 require __DIR__.'/auth.php';

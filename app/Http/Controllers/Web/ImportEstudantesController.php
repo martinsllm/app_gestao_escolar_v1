@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ImportRequest;
 use App\Jobs\ImportCsvJob;
 use App\Traits\ApiResponse;
+use Exception;
 
 class ImportEstudantesController extends Controller
 {
@@ -16,14 +17,22 @@ class ImportEstudantesController extends Controller
 
     }
 
+    public function create(){
+        return view('pages.estudantes.import');
+    }
+
     public function import(ImportRequest $request){
 
-     $fileName = 'import-' . now()->format('Y-m-d-H-i-s') . '.csv';
+     try {
+        $fileName = 'import-' . now()->format('Y-m-d-H-i-s') . '.csv';
         
-     $path = $request->file('file')->storeAs('uploads', $fileName);
+        $path = $request->file('file')->storeAs('uploads', $fileName);
 
-     ImportCsvJob::dispatchSync($path);
+        ImportCsvJob::dispatchSync($path);
 
-     return $this->response(['message' => 'Data is being imported'], 200); 
+        return back()->with('message', 'File uploaded successfully!');
+     } catch (Exception $e) {
+        return back()->with('message', 'File upload failed.');
+     }
     }
 }
