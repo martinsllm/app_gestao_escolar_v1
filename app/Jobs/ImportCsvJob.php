@@ -14,6 +14,8 @@ class ImportCsvJob implements ShouldQueue
 {
     use Queueable;
 
+    private $errors = [];
+
     /**
      * Create a new job instance.
      */
@@ -47,6 +49,7 @@ class ImportCsvJob implements ShouldQueue
             $matricula = $record['matricula'] ?? null;
 
             if(Estudante::where('matricula', $matricula)->exists()){
+                $this->errors[] = 'Matricula ja cadastrada: ' . $matricula;
                 continue; //ignora a linha
             }
 
@@ -77,5 +80,9 @@ class ImportCsvJob implements ShouldQueue
             Estudante::insert($batchInsert);
             $batchInsert = [];
         }
+    }
+
+    public function getErrors() {
+        return $this->errors;
     }
 }

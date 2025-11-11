@@ -24,7 +24,15 @@ class ImportEstudantesController extends Controller
         
         $path = $request->file('file')->storeAs('uploads', $fileName);
 
-        ImportCsvJob::dispatchSync($path);
+        $job = new ImportCsvJob($path);
+
+        $job->handle();
+
+        $errors = $job->getErrors();
+
+        if(!empty($errors)){
+            return back()->withErrors($errors)->withInput();
+        }
 
         return back()->with('message', 'File uploaded successfully!');
      } catch (Exception $e) {

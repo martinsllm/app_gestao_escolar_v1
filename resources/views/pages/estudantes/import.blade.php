@@ -12,12 +12,23 @@
                     <form action="{{ route('import.estudantes') }}" enctype="multipart/form-data" method="POST">
                         @csrf
                         <x-label>Upload</x-label>
-                        <x-input type="file" id="file" name="file" accept=".csv" required multiple />
+                        <x-input type="file" id="file" name="file" accept=".csv" required />
                         <p class="text-xs italic">Selecione um arquivo CSV</p>
                         <div class="w-full px-3 md:mb-0 mt-5" align="right">
                             <x-button>Importar</x-button>
                         </div>
                     </form>
+                    @if ($errors->any())
+                        <div>
+                            <h4>Erros na Importação:</h4>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     @if (session('message'))
                         {{ session('message') }}
                     @endif
