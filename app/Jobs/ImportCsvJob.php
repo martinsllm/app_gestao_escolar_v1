@@ -44,18 +44,21 @@ class ImportCsvJob implements ShouldQueue
         $records = (new Statement())->process($csv);
 
         $batchInsert = [];
+        $rowNumber = 1;
 
         foreach($records as $record){
+            $rowNumber++;
             $matricula = $record['matricula'] ?? null;
 
             if(Estudante::where('matricula', $matricula)->exists()){
-                $this->errors[] = 'Matricula ja cadastrada: ' . $matricula;
+                $this->errors[] = 'Linha ' . $rowNumber . ' - Matrícula ' . $matricula . ' já cadastrada';
                 continue; //ignora a linha
             }
 
             $turma = Turma::where('codigo', $record['turma'])->first();
 
             if(!$turma){
+                $this->errors[] = 'Linha ' . $rowNumber . ' - Turma não encontrada: ' . $record['turma'];
                 continue; //ignora a linha
             }
 

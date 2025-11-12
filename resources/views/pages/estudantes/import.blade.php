@@ -18,21 +18,24 @@
                             <x-button>Importar</x-button>
                         </div>
                     </form>
-                    @if ($errors->any())
-                        <div>
-                            <h4>Erros na Importação:</h4>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-
-                    @if (session('message'))
-                        {{ session('message') }}
-                    @endif
+                    
                 </div>
+                @if ($errors->any())
+                    <div class="p-6">
+                        <h4>Erros na Importação:</h4>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if (session('message'))
+                    <div class="p-6">
+                        {{ session('message') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
