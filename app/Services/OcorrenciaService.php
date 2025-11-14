@@ -19,8 +19,8 @@ class OcorrenciaService
     public function list($request): Builder {
         $query = $this->ocorrencia->query();
 
-        if($request->has('filtro')){
-           $this->filter($query, $request->filtro);
+        if($request->has('medida')){
+           $this->filter($query, $request->medida);
         }
         
         return $query;

@@ -5,7 +5,9 @@ use App\Http\Controllers\Web\ExportEstudanteController;
 use App\Http\Controllers\Web\ExportOcorrenciaController;
 use App\Http\Controllers\Web\ExportTurmaController;
 use App\Http\Controllers\Web\ImportEstudantesController;
+use App\Http\Controllers\Web\OcorrenciaController;
 use App\Http\Controllers\Web\ProfileController;
+use App\Models\Ocorrencia;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('estudantes', [EstudanteController::class, 'index'])->name('estudantes.index'); 
+    Route::get('/ocorrencias', [OcorrenciaController::class, 'index'])->name('ocorrencias.index');
     Route::get('/estudantes/import', [ImportEstudantesController::class, 'create'])->name('estudantes.import');
     Route::post('/import/estudantes', [ImportEstudantesController::class, 'import'])->name('import.estudantes');
     Route::get('/export/ocorrencias/{extensao}', action: [ExportOcorrenciaController::class, 'export'])->name('export.ocorrencias');
