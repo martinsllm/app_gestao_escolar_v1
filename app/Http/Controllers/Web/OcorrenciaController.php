@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Services\MedidaService;
 use App\Services\OcorrenciaService;
 use Illuminate\Http\Request;
 
 class OcorrenciaController extends Controller
 {
-    public function __construct(public OcorrenciaService $ocorrenciaService)
+    public function __construct(public OcorrenciaService $ocorrenciaService, public MedidaService $medidaService)
     {
 
     }
@@ -19,6 +20,8 @@ class OcorrenciaController extends Controller
 
         $result = $query->paginate(5);
 
-        return view('pages.ocorrencias.index', compact('result'));
+        $medidas = $this->medidaService->list();
+
+        return view('pages.ocorrencias.index', compact('result', 'medidas'));
     }
 }
