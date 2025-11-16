@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EstudanteRequest;
+use App\Models\Estudante;
 use App\Services\EstudanteService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
@@ -84,5 +85,11 @@ class EstudanteControllerApi extends Controller
         $this->estudanteService->delete($estudante);
 
         return $this->response(['message' => 'Estudante deleted successfully'], 200);
+    }
+
+    public function fetchSuggestions(Request $request){
+        $query = $request->input('term');
+        $suggestions = Estudante::where('nome_completo', 'like', "%{$query}%")->limit(5)->get();
+        return $this->response($suggestions, 200);
     }
 }

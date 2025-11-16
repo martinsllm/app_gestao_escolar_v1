@@ -19,7 +19,7 @@ class OcorrenciaService
     public function list($request): Builder {
         $query = $this->ocorrencia->query();
 
-        if($request->has('medida_id')){
+        if($request->has('estudante_id')){
            $this->filter($query, $request->query());
         }
         
