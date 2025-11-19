@@ -2,7 +2,7 @@
     $('#search').autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: '/api/v1/fetch-suggestions',
+                url: '/api/v1/fetch',
                 dataType: "json",
                 data: {
                     term: request.term

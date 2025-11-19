@@ -12,7 +12,7 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->name('api.')->group(function () {
     Route::apiResource('estudantes', EstudanteControllerApi::class);
-    Route::get('/fetch-suggestions', [EstudanteControllerApi::class, 'fetchSuggestions'])->name('fetch.suggestions');
+    Route::get('/fetch', [EstudanteControllerApi::class, 'fetchSuggestions'])->name('fetch.suggestions');
     Route::apiResource('turmas', TurmaControllerApi::class);
     Route::apiResource('ocorrencias', OcorrenciaControllerApi::class);
     Route::apiResource('medidas', MedidaControllerApi::class);

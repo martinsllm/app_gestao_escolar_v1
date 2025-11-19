@@ -34,9 +34,9 @@ class ImportEstudantesController extends Controller
             return back()->withErrors($errors)->withInput();
         }
 
-        return back()->with('message', 'File uploaded successfully!');
+        return back()->with('message', 'Arquivo importado com sucesso!');
      } catch (Exception $e) {
-        return back()->with('message', 'File upload failed!');
+        return back()->with('message', 'Falha ao importar o arquivo!');
      }
     }
 }

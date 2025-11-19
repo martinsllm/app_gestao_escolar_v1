@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <div class="w-full px-3 md:mb-0 mt-5" align="right">
-                            <a class="uppercase text-sm px-5 py-2.5" href="{{ route('estudantes.import') }}">+ Adicionar</a>
+                            <a class="uppercase text-sm px-5 py-2.5" href="{{ route('estudantes.create') }}">+ Adicionar</a>
                             <x-button>Pesquisar</x-button>
                         </div>
                     </form>

@@ -21,11 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/ocorrencias', [OcorrenciaController::class, 'index'])->name('ocorrencias.index');
     Route::get('/ocorrencias/create', [OcorrenciaController::class, 'create'])->name('ocorrencias.create');
     Route::post('/ocorrencias/create', [OcorrenciaController::class, 'store'])->name('ocorrencias.store');
-    Route::get('/estudantes/import', [ImportEstudantesController::class, 'create'])->name('estudantes.import');
-    Route::post('/import/estudantes', [ImportEstudantesController::class, 'import'])->name('import.estudantes');
-    Route::get('/export/ocorrencias/{extensao}', action: [ExportOcorrenciaController::class, 'export'])->name('export.ocorrencias');
-    Route::get('/export/turmas/{extensao}/{id}', [ExportTurmaController::class, 'export'])->name('export.turmas');
-    Route::get('/export/estudante/{id}', [ExportEstudanteController::class, 'export'])->name('export.estudante');
+    Route::get('/estudantes/create', [ImportEstudantesController::class, 'create'])->name('estudantes.create');
+    Route::post('/estudantes/import', [ImportEstudantesController::class, 'import'])->name('import.estudantes');
+    Route::get('/ocorrencias/export/{extensao}', action: [ExportOcorrenciaController::class, 'export'])->name('export.ocorrencias');
+    Route::get('/turmas/export/{extensao}/{id}', [ExportTurmaController::class, 'export'])->name('export.turmas');
+    Route::get('/estudante/export/{id}', [ExportEstudanteController::class, 'export'])->name('export.estudante');
 });
 
 require __DIR__.'/auth.php';
