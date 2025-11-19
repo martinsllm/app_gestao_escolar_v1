@@ -24,7 +24,7 @@
                         {{ __('Estudantes') }}
                     </x-nav-link>
                     <x-nav-link :href="route('ocorrencias.index')" :active="request()->routeIs('ocorrencias.index')">
-                        {{ __('Ocorrencias') }}
+                        {{ __('Ocorrências') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -18,7 +18,6 @@
                             <x-button>Importar</x-button>
                         </div>
                     </form>
-                    
                 </div>
                 @if ($errors->any())
                     <div class="p-6">

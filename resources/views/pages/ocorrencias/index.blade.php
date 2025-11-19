@@ -45,7 +45,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div align="right">
-                        <a class="uppercase text-sm px-5 py-2.5" href="">+ Nova</a>
+                        <a class="uppercase text-sm px-5 py-2.5" href="{{ route('ocorrencias.create') }}">+ Nova</a>
                         <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'xlsx']) }}">xlsx</a>
                         <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'csv']) }}">csv</a>
                         <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'pdf']) }}" target="_blank">pdf</a>
