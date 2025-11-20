@@ -40,9 +40,9 @@
         <x-card>
             <div align="right">
                 <a class="uppercase text-sm px-5 py-2.5" href="{{ route('ocorrencias.create') }}">+ Nova</a>
-                <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'xlsx']) }}">xlsx</a>
-                <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'csv']) }}">csv</a>
-                <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'pdf']) }}" target="_blank">pdf</a>
+                <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'xlsx','estudante_id' => request()->estudante_id, 'medida_id' => request()->medida_id]) }}">xlsx</a>
+                <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'csv','estudante_id' => request()->estudante_id, 'medida_id' => request()->medida_id]) }}">csv</a>
+                <a class="uppercase text-sm px-5 py-2.5" href="{{ route('export.ocorrencias', ['extensao' => 'pdf', 'estudante_id' => request()->estudante_id, 'medida_id' => request()->medida_id]) }}" target="_blank">pdf</a>
             </div>
 
             <x-table>

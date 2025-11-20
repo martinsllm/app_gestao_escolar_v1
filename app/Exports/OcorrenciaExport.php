@@ -2,20 +2,22 @@
 
 namespace App\Exports;
 
-use App\Services\OcorrenciaService;
+
+use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
 class OcorrenciaExport implements FromCollection, WithHeadings, WithMapping
 {
-    public function __construct(public OcorrenciaService $ocorrenciaService)
+    public function __construct(public Builder $query)
     {
+        $this->query = $query;
     }
 
     public function collection()
     {
-        return $this->ocorrenciaService->listAll();
+        return $this->query->get();
     }
 
     public function headings(): array
